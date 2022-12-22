@@ -4,8 +4,8 @@
 // ```tsx
 // import type { ComponentStory } from '@storybook/react'
 //
-// export const generated: ComponentStory<typeof LoginForm> = (args) => {
-//   return <LoginForm {...args} />
+// export const generated: ComponentStory<typeof Header> = (args) => {
+//   return <Header {...args} />
 // }
 // ```
 //
@@ -13,17 +13,13 @@
 
 import type { ComponentMeta } from '@storybook/react'
 
-import LoginForm from './LoginForm'
+import Header from './Header'
 
 export const generated = () => {
-  return (
-    <div className="h-fit w-96">
-      <LoginForm />
-    </div>
-  )
+  return <Header />
 }
 
 export default {
-  title: 'Components/LoginForm',
-  component: LoginForm,
-} as ComponentMeta<typeof LoginForm>
+  title: 'Components/Header',
+  component: Header,
+} as ComponentMeta<typeof Header>

@@ -1,5 +1,14 @@
 import type { Prisma } from '@prisma/client'
 import { db } from 'api/src/lib/db'
+import crypto from 'crypto-js'
+
+export const genPassword = (password: string) => {
+  const salt = crypto.lib.WordArray.random(128 / 8).toString()
+  const hashedPassword = crypto
+    .PBKDF2(password, salt, { keySize: 256 / 32 })
+    .toString()
+  return { salt, hashedPassword }
+}
 
 export default async () => {
   try {
@@ -9,7 +18,7 @@ export default async () => {
     //
     // Update "const data = []" to match your data model and seeding needs
     //
-    const data: Prisma.UserExampleCreateArgs['data'][] = [
+    const data: Prisma.UserCreateArgs['data'][] = [
       // To try this example data with the UserExample model in schema.prisma,
       // uncomment the lines below and run 'yarn rw prisma migrate dev'
       //
@@ -28,8 +37,8 @@ export default async () => {
       //
       // Change to match your data model and seeding needs
       //
-      data.map(async (data: Prisma.UserExampleCreateArgs['data']) => {
-        const record = await db.userExample.create({ data })
+      data.map(async (data: Prisma.UserCreateArgs['data']) => {
+        const record = await db.user.create({ data })
         console.log(record)
       })
     )
